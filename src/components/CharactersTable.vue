@@ -1,7 +1,12 @@
 <template> 
-    <div style="display: flex; padding: 3vh 5vw 3vh 10vw;">
-        <span @click="showFavourite = false" style="margin-right: 50px" :class="{active: !showFavourite}">All Characters</span>
-        <span @click="showFavourite = true" :class="{active: showFavourite}">Favourites</span>
+    <div class="selection-bar">
+        <div>
+            <span @click="showFavourite = false" :class="{active: !showFavourite}">All Characters</span>
+        </div>
+        <div>
+            <span @click="showFavourite = true" :class="{active: showFavourite}">Favourites</span>
+        </div>
+        
     </div>
     <div class="table">
         <div class="table-head"> 
@@ -51,6 +56,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.selection-bar {
+    display: flex; 
+    padding: 3vh 5vw 3vh 10vw;
+    div {
+            margin: 0;
+            text-align: center;
+            padding-right: 50px;
+            span {
+                margin: 0;
+            }
+        }
+}
 .table {
     display: flex;
     flex-direction: column;
@@ -59,7 +76,7 @@ export default {
         background-color: rgba($primary, 0.25);
     }
 }
-.table-head-attributes, .table-item {
+.table-head-attributes {
     margin: 0 auto;
     max-width: 80%;
     display: flex;
@@ -79,5 +96,22 @@ export default {
     color: $secondary;
     border-bottom: 3px solid $secondary;
 }
-
+@media (max-width: 375px) {
+    .selection-bar {
+        display: flex; 
+        justify-content: center;
+        div {
+            padding-right: 0;
+            margin: 0;
+            flex: 1 1 0px;
+            text-align: center;
+            span {
+                margin: 0;
+            }
+        }
+    }
+    .table-head {
+        display: none;
+    }
+}
 </style>

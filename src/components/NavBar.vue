@@ -20,4 +20,11 @@ export default {
     border-bottom: 1px solid $primary;
     padding: 3vh 5vw 3vh 10vw;
 }
+@media (max-width: 375px) {
+   .nav-bar{
+       padding: 0;
+       flex-direction: column;
+       justify-content: center;
+   } 
+}
 </style>

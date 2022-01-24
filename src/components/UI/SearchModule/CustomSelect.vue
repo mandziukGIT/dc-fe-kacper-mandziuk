@@ -107,5 +107,12 @@ export default {
 .selectHide {
   display: none;
 }
-
+@media (max-width: 375px) {
+  .custom-select {
+    width: 100%;
+    .selected {
+      border: none;
+    }
+  }
+}
 </style>

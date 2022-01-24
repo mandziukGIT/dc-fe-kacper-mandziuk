@@ -1,16 +1,16 @@
 <template>
     <div class="search-module">
-        <div>
+        <div @click="isExpanded = !isExpanded" style="text-align: center">
             <p>Search by</p>
         </div>
-        <div>
+        <div v-if="isExpanded">
             <custom-select 
             :options="['Name', 'Identifier', 'Episode']"
             class="select"
             @option-input="changeOption"
             />
         </div>
-        <div>
+        <div v-if="isExpanded">
             <div style="display: flex">
                 <input type="text" v-model="filterPhrase"/>
                 <span class="material-icons" style="font-size: 2rem; padding-right: 15px; color: #11B0C8;" @click="filterCharacters">search</span>  
@@ -28,7 +28,8 @@ export default {
     data() {
         return {
             filterBy: 'Name',
-            filterPhrase: ''
+            filterPhrase: '',
+            isExpanded: false
         }
     },
     methods: {
@@ -76,5 +77,15 @@ input[type="text"] {
     border-radius: 15px;
     font-size: 16px;
     padding: 0 1rem;
+}
+@media (max-width: 375px) {
+    .search-module {
+        margin: 30px auto;
+    > * {
+        display: flex;
+        justify-content: center;
+    }
+}
+
 }
 </style>

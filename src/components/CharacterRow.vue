@@ -6,8 +6,34 @@
         <div><span class="material-icons">{{genderIcon}}</span>{{character.gender}}</div>
         <div>{{character.species}}</div>
         <div>{{lastEpisodeCode}}</div>
-        <div><div class="favButton" :class="{'active': isActive}" @click="addToFav"><i class="material-icons" style="margin: auto 0">star</i></div></div>
+        <div><div class="favButton" :class="{'active': isFav}" @click="addToFav"><i class="material-icons" style="margin: auto 0">star</i></div></div>
     </div>
+        <div class="mobile-table-item">
+        <div class="mobile-table-attribute">
+            <div>Name</div>
+            <div>{{character.name}}</div>   
+        </div>
+        <div class="mobile-table-attribute"> 
+            <div>ID</div>
+            <div>{{character.id}}</div>
+        </div>
+        <div class="mobile-table-attribute">
+            <div>Gender</div>
+            <div><span class="material-icons">{{genderIcon}}</span>{{character.gender}}</div>
+        </div>
+        <div class="mobile-table-attribute">
+            <div>Species</div>
+            <div>{{character.species}}</div>
+        </div>
+        <div class="mobile-table-attribute">
+            <div>Last Episode</div>
+            <div>{{lastEpisodeCode}}</div>
+        </div>
+        <div class="mobile-table-attribute">
+            <div class="favButton" :class="{'active': isFav}" @click="addToFav"> {{!isFav ? 'Add To Favourites' : 'Remove From Favourite'}}</div>
+        </div>
+    </div>
+    
 </template>
 
 <script>
@@ -21,13 +47,13 @@ export default {
     },
     data() {
         return {
-            isActive: false,
+            isFav: false,
             lastEpisodeCode: null
         }
     },
     methods: {
         addToFav() {
-            this.isActive = !this.isActive
+            this.isFav = !this.isFav
             this.$emit("update-fav-characters")
         }
     },
@@ -54,15 +80,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.table-item > * {
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    flex: 1 1 0px;
+.table-item {
     margin: 0 auto;
     max-width: 80%;
+    display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    & > * {
+        display: flex;
+        align-items: center;
+        flex: 1 1 0px;
+    }
 }
+
 img {
     height: 68px;
     width: 43px;
@@ -75,6 +105,8 @@ img {
     background-color: white;
     border: 2px solid $secondary;
     border-radius: 8px;
+    justify-content: center;
+    color: $secondary;
     i {
         color: $secondary
     }
@@ -82,6 +114,7 @@ img {
 }
 .active{
     background-color: $secondary;
+    color: #FFF;
 i {
         color: #FFF
     }
@@ -92,5 +125,31 @@ i {
     margin: 0;
     padding:0;
 }
+.mobile-table-item {
+    display: none;
 
+}
+
+@media (max-width: 375px) {
+    .table-item {
+        display: none;
+    }
+    .mobile-table-item {
+        padding: 10px 10px;
+        border-bottom: 1px solid $primary;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .mobile-table-attribute {
+        margin: 10px 0;
+        display: flex;
+        flex-direction: row;
+        
+        * {
+            flex: 1 1 0px
+        }   
+    
+    }
+}
 </style>

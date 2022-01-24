@@ -12,6 +12,7 @@ export default createStore({
       state.characters = payload
     },
     SET_INFO(state, payload) {
+      console.log(payload)
       state.info = payload
     },
     SET_CURRENT_PAGE(state, payload) {

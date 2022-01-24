@@ -1,5 +1,5 @@
 <template>
-    <div v-if="info" style="display: flex; padding: 3vh 5vw 3vh 10vw">
+    <div v-if="info && info.pages > 1" style="display: flex; padding: 3vh 5vw 3vh 10vw">
         <button @click="prevPage" :disabled="currentPage === 1">
             <span class="material-icons">arrow_left</span>
         </button>
@@ -24,7 +24,7 @@ export default {
 
     computed: {
         showAfter() {
-            return this.currentPage === 1 ? 3 : 2 
+            return this.currentPage === 1 ? 3 : this.currentPage === 2 ? 2 : 1
         },
         showBefore() {
             return this.currentPage === 42 ? 3 : 2 
@@ -43,7 +43,11 @@ export default {
         },
         setCurrentPage(page) {
             this.currentPage = page;
-            this.$store.dispatch("fetchCharacters", page)
+        }
+    },
+    watch: {
+        currentPage(val) {
+            this.$store.dispatch("fetchCharacters", val)
         }
     }
 }
