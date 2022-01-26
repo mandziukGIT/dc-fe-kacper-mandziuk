@@ -16,12 +16,13 @@
 
 <script>
 export default {
+
     data() {
         return {
-            currentPage: 1,  
+            currentPage: 1
         }
     },
-
+   
     computed: {
         showAfter() {
             return this.currentPage === 1 ? 3 : this.currentPage === 2 ? 2 : 1
@@ -37,17 +38,40 @@ export default {
     methods: {
         prevPage() {
             this.currentPage -= 1;
+            this.$store.dispatch("fetchCharacters", this.info.prev)
         },
         nextPage() {
             this.currentPage += 1;
+            this.$store.dispatch("fetchCharacters", this.info.next)
         },
         setCurrentPage(page) {
+            let searchPath,queryParams;
+
+            if(this.info.current.includes("?")) {
+               [searchPath, queryParams] = this.info.current.split('?');
+               if(queryParams.includes("&")) {
+                    const quieries = queryParams.split("&") 
+                    quieries.shift()
+                    searchPath += `?page=${page}&${quieries.toString()}` 
+                   this.$store.dispatch("fetchCharacters", searchPath)
+               } else {
+                   if(queryParams.includes("page")) {
+                       searchPath += `?page=${page}`
+                   } else {
+                       searchPath += `?page=${page}&${queryParams.toString()}`
+                   }
+                   this.$store.dispatch("fetchCharacters", searchPath)
+               }
+
+            }else {
+                this.$store.dispatch("fetchCharacters", this.info.current + `?page=${page}`)
+            }
             this.currentPage = page;
         }
     },
     watch: {
-        currentPage(val) {
-            this.$store.dispatch("fetchCharacters", val)
+        'info.pages'() {
+            this.currentPage = 1
         }
     }
 }

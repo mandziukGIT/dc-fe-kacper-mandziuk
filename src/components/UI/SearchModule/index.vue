@@ -40,17 +40,12 @@ export default {
             let searchEndpoint = "https://rickandmortyapi.com/api/"
 
             if(!this.filterPhrase) {
-                this.$store.dispatch("fetchCharacters")
-                return
+                searchEndpoint += "character"
+            } else {
+                this.filterBy === "Name" ? searchEndpoint +=  `character/?name=${this.filterPhrase}` : this.filterBy === "Identifier" ? searchEndpoint += `character/${this.filterPhrase}` : searchEndpoint += `episode/${this.filterPhrase}`;
             }
-
-            if(this.filterBy === "Name") {
-                this.$store.dispatch("filterByName", searchEndpoint +=  `character/?name=${this.filterPhrase}`)
-            } else if(this.filterBy === "Identifier") {
-                this.$store.dispatch("findByIdentifier", searchEndpoint += `character/${this.filterPhrase}`)
-            } else if(this.filterBy === "Episode") {
-                this.$store.dispatch("filterByEpisode", searchEndpoint += `episode/${this.filterPhrase}`)
-            }
+              
+            this.$store.dispatch("fetchCharacters", searchEndpoint)
         }
     }
 }

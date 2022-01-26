@@ -12,7 +12,7 @@ export default {
     CharactersTable
   },
   mounted() {
-    this.$store.dispatch('fetchCharacters');
+    this.$store.dispatch('fetchCharacters', "https://rickandmortyapi.com/api/character");
   }
 }
 </script>
