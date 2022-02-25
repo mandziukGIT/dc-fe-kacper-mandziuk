@@ -1,0 +1,15 @@
+<template>
+    <nav>
+        <ul>
+            <li>
+                Movies
+            </li>
+            <li>
+                Screenings
+            </li>
+            <li>
+                Pricing
+            </li>
+        </ul>
+    </nav>
+</template>
