@@ -11,5 +11,13 @@
                 Pricing
             </li>
         </ul>
+        <div>
+            <button>
+                Login
+            </button>
+            <button>
+                Register
+            </button>
+        </div>
     </nav>
 </template>
